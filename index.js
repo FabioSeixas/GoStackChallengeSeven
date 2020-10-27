@@ -1,3 +1,6 @@
+if(__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
+}
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import { AppRegistry } from 'react-native';

@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   Container,
   ProductContainer,
@@ -36,14 +37,18 @@ interface Product {
 }
 
 const Cart: React.FC = () => {
-  const { increment, decrement, products } = useCart();
+  const { increment, decrement, products, clearStorage } = useCart();
+
+  function handleClearCart(): void {
+    clearStorage();
+  }
 
   function handleIncrement(id: string): void {
-    // TODO
+    increment(id);
   }
 
   function handleDecrement(id: string): void {
-    // TODO
+    decrement(id);
   }
 
   const cartTotal = useMemo(() => {
@@ -61,6 +66,9 @@ const Cart: React.FC = () => {
   return (
     <Container>
       <ProductContainer>
+        <TouchableOpacity onPress={handleClearCart}>
+          <Text>Limpar Carrinho</Text>
+        </TouchableOpacity>
         <ProductList
           data={products}
           keyExtractor={item => item.id}
