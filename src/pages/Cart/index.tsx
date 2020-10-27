@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   Container,
   ProductContainer,
@@ -22,6 +21,7 @@ import {
   TotalProductsContainer,
   TotalProductsText,
   SubtotalValue,
+  RemoveItemTouchable,
 } from './styles';
 
 import { useCart } from '../../hooks/cart';
@@ -37,10 +37,10 @@ interface Product {
 }
 
 const Cart: React.FC = () => {
-  const { increment, decrement, products, clearStorage } = useCart();
+  const { increment, decrement, products, removeItem } = useCart();
 
-  function handleClearCart(): void {
-    clearStorage();
+  function handleClearCart(id): void {
+    removeItem(id);
   }
 
   function handleIncrement(id: string): void {
@@ -66,9 +66,6 @@ const Cart: React.FC = () => {
   return (
     <Container>
       <ProductContainer>
-        <TouchableOpacity onPress={handleClearCart}>
-          <Text>Limpar Carrinho</Text>
-        </TouchableOpacity>
         <ProductList
           data={products}
           keyExtractor={item => item.id}
@@ -92,6 +89,11 @@ const Cart: React.FC = () => {
                     <ProductPrice>
                       {formatValue(item.price * item.quantity)}
                     </ProductPrice>
+                    <RemoveItemTouchable
+                      onPress={() => handleClearCart(item.id)}
+                    >
+                      <FeatherIcon name="trash" color="#E83F5B" size={16} />
+                    </RemoveItemTouchable>
                   </TotalContainer>
                 </ProductPriceContainer>
               </ProductTitleContainer>

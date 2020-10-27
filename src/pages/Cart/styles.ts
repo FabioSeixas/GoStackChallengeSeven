@@ -72,6 +72,12 @@ export const ProductQuantity = styled.Text`
   color: #e83f5b;
 `;
 
+export const RemoveItemTouchable = styled.TouchableOpacity`
+  position: absolute;
+  right: 0px;
+  top: 8px;
+`;
+
 export const ActionContainer = styled.View`
   align-self: flex-end;
   align-items: center;
