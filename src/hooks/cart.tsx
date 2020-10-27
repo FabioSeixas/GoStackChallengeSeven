@@ -21,7 +21,7 @@ interface CartContext {
   addToCart(item: Omit<Product, 'quantity'>): void;
   increment(id: string): void;
   decrement(id: string): void;
-  removeItem(): void;
+  removeItem(id: string): void;
 }
 
 const CartContext = createContext<CartContext | null>(null);
